@@ -7,7 +7,7 @@ import {
 
 @Injectable()
 export class MongooseConfigService implements MongooseOptionsFactory {
-  constructor(private configService: ConfigService) {}
+  constructor(private readonly configService: ConfigService) {}
   createMongooseOptions(): MongooseModuleOptions {
     return {
       uri: this.configService.get<string>('MONGODB_URI'),
