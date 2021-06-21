@@ -1,13 +1,13 @@
 import { AddressModule } from './address/address.module';
 import { Module } from '@nestjs/common';
-import { MongooseConfigModule } from './config/mongoose/mongoose-config.module';
+import { DataBaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     AddressModule,
     ConfigModule.forRoot({ isGlobal: true }),
-    MongooseConfigModule,
+    DataBaseModule,
   ],
   controllers: [],
   providers: [],

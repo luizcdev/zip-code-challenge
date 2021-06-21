@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ViaCepClientModule } from 'src/clients/viacep/viacep-client.module';
-import { MongooseConfigService } from './mongoose-config.service';
+import { DatabaseConfigService } from './database-config.service';
 
 @Module({
   imports: [
     ViaCepClientModule,
     MongooseModule.forRootAsync({
-      useClass: MongooseConfigService,
+      useClass: DatabaseConfigService,
     }),
   ],
 })
-export class MongooseConfigModule {}
+export class DataBaseModule {}
