@@ -1,8 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { AddressDto } from 'src/common/dto/address.dto';
 
-@Schema()
-export class Address extends Document {
+@Schema({ timestamps: true })
+export class Address extends Document implements AddressDto {
   @Prop()
   zipCode: string;
 
@@ -10,13 +11,16 @@ export class Address extends Document {
   street: string;
 
   @Prop()
-  district: string;
+  neighborhood: string;
 
   @Prop()
   city: string;
 
   @Prop()
   state: string;
+
+  @Prop({ expires: 10 })
+  createdAt: Date;
 }
 
 export const AddressSchema = SchemaFactory.createForClass(Address);

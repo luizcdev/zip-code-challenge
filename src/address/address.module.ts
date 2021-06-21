@@ -1,15 +1,11 @@
 import { AddressController } from './address.controller';
 import { AddressService } from './address.service';
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Address, AddressSchema } from './schema/address.schema';
-import { ViaCepClientModule } from 'src/clients/viacep/viacep-client.module';
+import { AddressCacheModule } from 'src/address-cache/address-cache.module';
+import { AddressApiModule } from 'src/address-api/address-api.module';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: Address.name, schema: AddressSchema }]),
-    ViaCepClientModule,
-  ],
+  imports: [AddressApiModule, AddressCacheModule],
   controllers: [AddressController],
   providers: [AddressService],
 })

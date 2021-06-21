@@ -1,7 +1,7 @@
 export interface AddressDto {
   zipCode: string;
   street: string;
-  district: string;
+  neighborhood: string;
   city: string;
   state: string;
 }
