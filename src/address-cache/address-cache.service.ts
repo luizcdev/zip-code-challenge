@@ -15,7 +15,7 @@ export class AddressCacheService {
     createdAddress.save();
   }
 
-  async findByZipCode(zipCode: string): Promise<AddressDto> {
-    return this.addressModel.findOne({ zipCode: zipCode }).exec();
+  async findBySeachKey(searchKey: string): Promise<AddressDto> {
+    return this.addressModel.findOne({ searchKey: searchKey }).exec();
   }
 }

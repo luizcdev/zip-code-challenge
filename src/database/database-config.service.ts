@@ -12,6 +12,7 @@ export class DatabaseConfigService implements MongooseOptionsFactory {
     return {
       uri: this.configService.get<string>('MONGODB_URI'),
       dbName: 'zipcode',
+      useCreateIndex: true,
     };
   }
 }

@@ -4,6 +4,9 @@ import { AddressDto } from 'src/common/dto/address.dto';
 
 @Schema({ timestamps: true })
 export class Address extends Document implements AddressDto {
+  @Prop({ required: true, unique: true })
+  searchKey: string;
+
   @Prop()
   zipCode: string;
 
@@ -19,7 +22,7 @@ export class Address extends Document implements AddressDto {
   @Prop()
   state: string;
 
-  @Prop({ expires: 10 })
+  @Prop({ expires: 10000 })
   createdAt: Date;
 }
 

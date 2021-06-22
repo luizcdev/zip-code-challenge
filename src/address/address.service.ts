@@ -11,13 +11,18 @@ export class AddressService {
     private readonly cacheService: AddressCacheService,
   ) {}
 
-  async findByZipCode(zipCode: string): Promise<AddressDto> {
+  async findByZipCode(
+    zipCode: string,
+    searchKey?: string,
+  ): Promise<AddressDto> {
+    if (!searchKey) searchKey = zipCode;
     const address: AddressDto = await this.getAddress(zipCode);
     if (!address) {
       const nextZipCode: string = this.getAndValidateNextZipCode(zipCode);
-      return this.findByZipCode(nextZipCode);
+      return this.findByZipCode(nextZipCode, searchKey);
     }
 
+    address.searchKey = searchKey;
     this.cacheService.create(address);
 
     return address;
@@ -25,7 +30,7 @@ export class AddressService {
 
   private async getAddress(zipCode: string): Promise<AddressDto> {
     return (
-      (await this.cacheService.findByZipCode(zipCode)) ||
+      (await this.cacheService.findBySeachKey(zipCode)) ||
       this.apiService.getByZipCode(zipCode)
     );
   }
