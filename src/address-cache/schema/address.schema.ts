@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { AddressDto } from 'src/common/dto/address.dto';
 
 @Schema({ timestamps: true })
-export class Address extends Document implements AddressDto {
+export class Address extends Document {
   @Prop({ required: true, unique: true })
   searchKey: string;
 
@@ -22,7 +21,7 @@ export class Address extends Document implements AddressDto {
   @Prop()
   state: string;
 
-  @Prop({ expires: 10000 })
+  @Prop({ expires: process.env.CACHE_TTL })
   createdAt: Date;
 }
 
