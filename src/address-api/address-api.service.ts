@@ -7,10 +7,10 @@ import { AddressDto } from 'src/common/dto/address.dto';
 export class AddressApiService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getAddressByZipCode(zipCode: string): Promise<AddressDto> {
+  async getByZipCode(zipCode: string): Promise<AddressDto> {
     return this.httpService
       .get(`${zipCode}/json/`)
-      .pipe(map((response) => mapByViaCepResponseDto(response.data)))
+      .pipe(map((response) => mapByViaCepResponseDto(response)))
       .toPromise();
   }
 }

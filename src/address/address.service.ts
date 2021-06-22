@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AddressApiService } from 'src/address-api/address-api.service';
 import { AddressCacheService } from 'src/address-cache/address-cache.service';
 import { AddressDto } from 'src/common/dto/address.dto';
+import { getNextZipCode } from './util/address.util';
 
 @Injectable()
 export class AddressService {
@@ -11,12 +12,30 @@ export class AddressService {
   ) {}
 
   async findByZipCode(zipCode: string): Promise<AddressDto> {
-    let address: AddressDto = await this.cacheService.findByZipCode(zipCode);
-
-    if (!address) address = await this.apiService.getAddressByZipCode(zipCode);
+    const address: AddressDto = await this.getAddress(zipCode);
+    if (!address) {
+      const nextZipCode: string = this.getAndValidateNextZipCode(zipCode);
+      return this.findByZipCode(nextZipCode);
+    }
 
     this.cacheService.create(address);
 
     return address;
+  }
+
+  private async getAddress(zipCode: string): Promise<AddressDto> {
+    return (
+      (await this.cacheService.findByZipCode(zipCode)) ||
+      this.apiService.getByZipCode(zipCode)
+    );
+  }
+
+  private getAndValidateNextZipCode(zipCode: string): string {
+    const ZIPCODE_BREAK = '00000000';
+    const nextZipCode: string = getNextZipCode(zipCode);
+    if (nextZipCode == ZIPCODE_BREAK)
+      throw new HttpException('zipCode not found', HttpStatus.NOT_FOUND);
+
+    return nextZipCode;
   }
 }
