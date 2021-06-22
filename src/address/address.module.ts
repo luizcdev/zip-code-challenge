@@ -1,11 +1,11 @@
 import { AddressController } from './address.controller';
 import { AddressService } from './address.service';
 import { Module } from '@nestjs/common';
-import { AddressCacheModule } from 'src/address-cache/address-cache.module';
 import { AddressApiModule } from 'src/address-api/address-api.module';
+import { CacheModule } from 'src/cache/cache.module';
 
 @Module({
-  imports: [AddressApiModule, AddressCacheModule],
+  imports: [AddressApiModule, CacheModule],
   controllers: [AddressController],
   providers: [AddressService],
 })
