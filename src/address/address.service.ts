@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ViaCepClientService } from 'src/viacep-client/viacep-client.service';
 import { AddressDto } from 'src/common/dto/address.dto';
 import { CacheService } from 'src/cache/cache.service';
@@ -36,9 +36,10 @@ export class AddressService {
 
   private getAndValidateNextZipCode(zipCode: string): string {
     const ZIPCODE_BREAK = '00000000';
+
     const nextZipCode: string = getNextZipCode(zipCode);
     if (nextZipCode == ZIPCODE_BREAK)
-      throw new HttpException('zipCode not found', HttpStatus.NOT_FOUND);
+      throw new NotFoundException(`zipCode ${zipCode} not found`);
 
     return nextZipCode;
   }
