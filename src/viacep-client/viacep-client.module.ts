@@ -1,4 +1,4 @@
-import { AddressApiService } from './address-api.service';
+import { ViaCepClientService } from './viacep-client.service';
 import { HttpModule, Module } from '@nestjs/common';
 import { ViaCepConfigService } from './viacep-config.service';
 
@@ -9,7 +9,7 @@ import { ViaCepConfigService } from './viacep-config.service';
     }),
   ],
   controllers: [],
-  providers: [AddressApiService],
-  exports: [AddressApiService],
+  providers: [ViaCepClientService],
+  exports: [ViaCepClientService],
 })
-export class AddressApiModule {}
+export class ViaCepApiModule {}

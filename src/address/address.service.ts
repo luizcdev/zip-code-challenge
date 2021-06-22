@@ -1,36 +1,35 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { AddressApiService } from 'src/address-api/address-api.service';
+import { ViaCepClientService } from 'src/viacep-client/viacep-client.service';
 import { AddressDto } from 'src/common/dto/address.dto';
 import { CacheService } from 'src/cache/cache.service';
 import { getNextZipCode } from './util/address.util';
 
 @Injectable()
 export class AddressService {
+  private readonly CACHE_PREFIX = 'ZIPCODE';
+
   constructor(
-    private readonly apiService: AddressApiService,
+    private readonly apiService: ViaCepClientService,
     private readonly cacheService: CacheService<AddressDto>,
   ) {}
 
-  async findByZipCode(
-    zipCode: string,
-    searchKey?: string,
-  ): Promise<AddressDto> {
-    if (!searchKey) searchKey = zipCode;
+  async findByZipCode(zipCode: string, key?: string): Promise<AddressDto> {
+    if (!key) key = zipCode;
 
     const address: AddressDto = await this.getAddress(zipCode);
     if (!address) {
       const nextZipCode: string = this.getAndValidateNextZipCode(zipCode);
-      return this.findByZipCode(nextZipCode, searchKey);
+      return this.findByZipCode(nextZipCode, key);
     }
 
-    this.cacheService.set(searchKey, address);
+    this.cacheService.set(this.CACHE_PREFIX, key, address);
 
     return address;
   }
 
   private async getAddress(zipCode: string): Promise<AddressDto> {
     return (
-      (await this.cacheService.get(zipCode)) ||
+      (await this.cacheService.get(this.CACHE_PREFIX, zipCode)) ||
       this.apiService.getByZipCode(zipCode)
     );
   }

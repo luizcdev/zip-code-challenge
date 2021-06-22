@@ -5,11 +5,15 @@ import { Cache } from 'cache-manager';
 export class CacheService<T> {
   constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
 
-  public async get(key: string): Promise<T> {
-    return this.cacheManager.get(key);
+  public async get(prefix: string, key: string): Promise<T> {
+    return this.cacheManager.get(this.getKey(prefix, key));
   }
 
-  public async set(key: string, value: T): Promise<T> {
-    return this.cacheManager.set(key, value);
+  public async set(prefix: string, key: string, value: T): Promise<T> {
+    return this.cacheManager.set(this.getKey(prefix, key), value);
+  }
+
+  private getKey(prefix: string, key: string): string {
+    return prefix + '#' + key;
   }
 }
