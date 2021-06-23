@@ -1,5 +1,5 @@
-import { Body } from '@nestjs/common';
-import { Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { JwtGuard } from 'src/core/auth/jwt/jwt-auth.guard';
 import { UserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 
@@ -7,6 +7,7 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @UseGuards(JwtGuard)
   @Post()
   async create(@Body() user: UserDto) {
     const { username, password } = await this.userService.create(user);
