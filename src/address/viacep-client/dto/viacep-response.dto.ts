@@ -1,4 +1,4 @@
-export interface ViaCepResponseDto {
+export class ViaCepResponseDto {
   cep: string;
   logradouro: string;
   bairro: string;

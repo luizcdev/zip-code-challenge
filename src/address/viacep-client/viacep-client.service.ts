@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { catchError, map } from 'rxjs/operators';
 import { mapByViaCepResponseDto } from './mapper/address-api-dto.mapper';
-import { AddressDto } from 'src/core/common/dto/address.dto';
+import { AddressDto } from 'src/address/dto/address.dto';
 import { HttpStatus } from '@nestjs/common';
 
 @Injectable()

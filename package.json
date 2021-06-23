@@ -28,6 +28,7 @@
     "@nestjs/mongoose": "^7.2.4",
     "@nestjs/passport": "^7.1.5",
     "@nestjs/platform-express": "^7.6.18",
+    "@nestjs/swagger": "^4.8.1",
     "cache-manager": "^3.4.4",
     "cache-manager-redis-store": "^2.0.0",
     "mongoose": "^5.12.14",
@@ -36,7 +37,8 @@
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "rxjs": "^6.6.6"
+    "rxjs": "^6.6.6",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",

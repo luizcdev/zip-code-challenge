@@ -3,7 +3,7 @@ import {
   BadRequestException,
   PipeTransform,
 } from '@nestjs/common';
-import { RegexPatterns } from 'src/core/common/regex-patterns';
+import { RegexPatterns } from 'src/core/util/regex-patterns';
 
 export class ZipCodePipe implements PipeTransform {
   transform(value: any) {

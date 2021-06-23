@@ -1,4 +1,4 @@
-import { AddressDto } from 'src/core/common/dto/address.dto';
+import { AddressDto } from 'src/address/dto/address.dto';
 import { AxiosResponse } from 'axios';
 import { ViaCepResponseDto } from '../dto/viacep-response.dto';
 
