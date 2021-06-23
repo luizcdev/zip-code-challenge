@@ -14,6 +14,7 @@ async function bootstrap() {
     .addBearerAuth()
     .addTag(DocumentationTagsEnum.AUTH)
     .addTag(DocumentationTagsEnum.ADDRESS)
+    .addTag(DocumentationTagsEnum.HEALTH)
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('doc', app, document);

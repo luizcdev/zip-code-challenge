@@ -4,7 +4,10 @@ import {
   MongooseHealthIndicator,
   HealthCheck,
 } from '@nestjs/terminus';
+import { DocumentationTagsEnum } from './core/util/documentation-tags.enum';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags(DocumentationTagsEnum.HEALTH)
 @Controller('health')
 export class HealthController {
   constructor(
