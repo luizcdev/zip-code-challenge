@@ -1,5 +1,5 @@
 import { HealthController } from './health.controller';
-import { AuthModule } from './core/auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 import { CacheModule } from './core/cache/cache.module';
 import { AddressModule } from './address/address.module';
 import { Module } from '@nestjs/common';

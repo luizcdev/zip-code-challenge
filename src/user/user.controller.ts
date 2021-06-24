@@ -1,9 +1,9 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
-import { JwtGuard } from 'src/core/auth/jwt/jwt-auth.guard';
+import { JwtGuard } from '../../src/auth/jwt/jwt-auth.guard';
 import { UserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { DocumentationTagsEnum } from 'src/core/util/documentation-tags.enum';
+import { DocumentationTagsEnum } from '../../src/core/util/documentation-tags.enum';
 
 @ApiBearerAuth()
 @ApiTags(DocumentationTagsEnum.AUTH)

@@ -1,4 +1,4 @@
-import { RegexPatterns } from 'src/core/util/regex-patterns';
+import { RegexPatterns } from '../../../src/core/util/regex-patterns';
 
 export function getNextZipCode(zipCode: string): string {
   return zipCode.replace(

@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import { ResponseTokenDto } from './dto/response-token.dto';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { DocumentationTagsEnum } from '../util/documentation-tags.enum';
+import { DocumentationTagsEnum } from '../core/util/documentation-tags.enum';
 @ApiTags(DocumentationTagsEnum.AUTH)
 @Controller()
 export class AuthController {
