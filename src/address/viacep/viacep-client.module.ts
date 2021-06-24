@@ -1,15 +1,15 @@
 import { ViaCepClientService } from './viacep-client.service';
 import { HttpModule, Module } from '@nestjs/common';
-import { ViaCepConfigService } from './viacep-config.service';
+import { ViaCepClientConfig } from './viacep-client.config';
 
 @Module({
   imports: [
     HttpModule.registerAsync({
-      useClass: ViaCepConfigService,
+      useClass: ViaCepClientConfig,
     }),
   ],
   controllers: [],
   providers: [ViaCepClientService],
   exports: [ViaCepClientService],
 })
-export class ViaCepApiModule {}
+export class ViaCepClientModule {}

@@ -1,11 +1,11 @@
 import { AddressController } from './address.controller';
 import { AddressService } from './address.service';
 import { Module } from '@nestjs/common';
-import { ViaCepApiModule } from '../../src/address/viacep-client/viacep-client.module';
 import { CacheModule } from '../../src/core/cache/cache.module';
+import { ViaCepClientModule } from './viacep/viacep-client.module';
 
 @Module({
-  imports: [ViaCepApiModule, CacheModule],
+  imports: [ViaCepClientModule, CacheModule],
   controllers: [AddressController],
   providers: [AddressService],
 })

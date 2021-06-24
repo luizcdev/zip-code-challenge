@@ -3,11 +3,11 @@ import {
   Injectable,
   BadRequestException,
   InternalServerErrorException,
+  HttpStatus,
 } from '@nestjs/common';
 import { catchError, map } from 'rxjs/operators';
-import { mapByViaCepResponseDto } from './mapper/address-api-dto.mapper';
-import { AddressDto } from '../../../src/address/dto/address.dto';
-import { HttpStatus } from '@nestjs/common';
+import { AddressDto } from '../dto/address.dto';
+import { mapByViaCepResponseDto } from './mapper/viacep.mapper';
 
 @Injectable()
 export class ViaCepClientService {

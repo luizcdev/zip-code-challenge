@@ -1,5 +1,5 @@
-import { AddressDto } from '../../../../src/address/dto/address.dto';
 import { AxiosResponse } from 'axios';
+import { AddressDto } from 'src/address/dto/address.dto';
 import { ViaCepResponseDto } from '../dto/viacep-response.dto';
 
 export function mapByViaCepResponseDto(origin: AxiosResponse): AddressDto {

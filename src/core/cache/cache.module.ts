@@ -1,15 +1,15 @@
 import { CacheService } from './cache.service';
 import { Module, CacheModule as NesJsCacheModule } from '@nestjs/common';
-import { RedisConfigService } from './redis-config.service';
+import { RedisConfig } from './redis.config';
 
 @Module({
   imports: [
     NesJsCacheModule.registerAsync({
-      useClass: RedisConfigService,
+      useClass: RedisConfig,
     }),
   ],
   controllers: [],
-  providers: [CacheService, RedisConfigService],
+  providers: [CacheService, RedisConfig],
   exports: [CacheService],
 })
 export class CacheModule {}

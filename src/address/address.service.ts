@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { ViaCepClientService } from '../../src/address/viacep-client/viacep-client.service';
 import { AddressDto } from '../../src/address/dto/address.dto';
 import { CacheService } from '../../src/core/cache/cache.service';
 import { getNextZipCode } from './util/address.util';
+import { ViaCepClientService } from './viacep/viacep-client.service';
 
 @Injectable()
 export class AddressService {
