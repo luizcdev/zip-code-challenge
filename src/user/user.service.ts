@@ -17,14 +17,16 @@ export class UserService {
     return this.userModel.findOne({ username, password }).exec();
   }
 
-  async create(user: UserRequestDto): Promise<User> {
-    let userDocument: User = await this.userModel
-      .findOne({ username: user.username })
+  async create(userRequest: UserRequestDto): Promise<User> {
+    const user: User = await this.userModel
+      .findOne({ username: userRequest.username })
       .exec();
 
-    if (userDocument) throw new BadRequestException('Username already exists');
+    if (user) throw new BadRequestException('Username already exists');
 
-    userDocument = new this.userModel(user);
-    return userDocument.save();
+    return this.userModel.create(<User>{
+      username: userRequest.username,
+      password: userRequest.password,
+    });
   }
 }

@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from '../../../src/user/user.service';
+import { UserService } from '../user.service';
 import { UserController } from '../user.controller';
 import { UserMock } from './user.mock';
 
@@ -26,15 +26,17 @@ describe('Auth Controller', () => {
     userServiceMock.create.mockReset();
   });
 
-  describe('login', () => {
-    it('should return token when receive valid credentials from a valid user', async () => {
+  describe('create', () => {
+    it('should return success message when save user', async () => {
       const user = UserMock.validUser();
       const request = UserMock.validRequest();
 
       userServiceMock.create.mockReturnValue(user);
       const result = await controller.create(request);
 
-      expect(result).toEqual({ message: 'user usertest created with success' });
+      expect(result).toEqual({
+        message: `user ${user.username} created with success`,
+      });
     });
   });
 });
