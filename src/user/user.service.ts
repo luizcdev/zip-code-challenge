@@ -11,13 +11,6 @@ export class UserService {
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
 
-  async findByUsernameAndPassword(
-    username: string,
-    password: string,
-  ): Promise<User> {
-    return this.userModel.findOne({ username, password }).exec();
-  }
-
   async findByUsername(username: string): Promise<User> {
     return this.userModel.findOne({ username }).exec();
   }

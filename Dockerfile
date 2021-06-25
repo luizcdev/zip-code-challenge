@@ -1,12 +1,9 @@
 FROM node:14-alpine
 
-WORKDIR /home/api
+WORKDIR /home/app
 
 COPY ./src ./src
-COPY ./package.json .
-COPY ./package-lock.json .
-COPY ./tsconfig.json .
-COPY ./tsconfig.build.json .
+COPY ./package.json ./package-lock.json ./tsconfig.json ./tsconfig.build.json ./.env ./ 
 
 RUN npm install
 RUN npm run test

@@ -6,7 +6,7 @@ import { User } from '../schema/user.schema';
 import { UserModule } from '../user.module';
 import { BadRequestException } from '@nestjs/common';
 
-describe('Auth Controller', () => {
+describe('User Service', () => {
   let service: UserService;
 
   const userModelMock = {
@@ -30,15 +30,12 @@ describe('Auth Controller', () => {
     userModelMock.create.mockReset();
   });
 
-  describe('findOne', () => {
+  describe('findByUsername', () => {
     it('should return user when find one', async () => {
       const user = UserMock.validUser();
-      const request = UserMock.validRequest();
+
       userModelMock.findOne.mockReturnValueOnce({ exec: () => user });
-      const result = await service.findByUsernameAndPassword(
-        request.username,
-        request.password,
-      );
+      const result = await service.findByUsername('password_test');
 
       expect(result).toEqual(user);
     });

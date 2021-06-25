@@ -1,3 +1,4 @@
+import { LoggerModule } from './core/logger/logger.module';
 import { HealthController } from './health.controller';
 import { AuthModule } from './auth/auth.module';
 import { CacheModule } from './core/cache/cache.module';
@@ -11,6 +12,7 @@ import { SeederModule } from './seeder/seeder.module';
 
 @Module({
   imports: [
+    LoggerModule,
     AuthModule,
     CacheModule,
     UserModule,

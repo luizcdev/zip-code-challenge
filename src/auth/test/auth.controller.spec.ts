@@ -5,12 +5,13 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../../../src/user/user.service';
 import { AuthMock } from './auth.mock';
 import { UnauthorizedException } from '@nestjs/common';
+import * as bcrypt from 'bcrypt';
 
 describe('Auth Controller', () => {
   let controller: AuthController;
 
   const userServiceMock = {
-    findByUsernameAndPassword: jest.fn(),
+    findByUsername: jest.fn(),
   };
 
   const jwtServiceMock = {
@@ -32,7 +33,7 @@ describe('Auth Controller', () => {
   });
 
   beforeEach(async () => {
-    userServiceMock.findByUsernameAndPassword.mockReset();
+    userServiceMock.findByUsername.mockReset();
     jwtServiceMock.sign.mockReset();
   });
 
@@ -42,7 +43,8 @@ describe('Auth Controller', () => {
       const user = AuthMock.validUser();
       const responseToken = AuthMock.validResponseToken();
 
-      userServiceMock.findByUsernameAndPassword.mockReturnValue(user);
+      user.password = await bcrypt.hash(user.password, 10);
+      userServiceMock.findByUsername.mockReturnValue(user);
       jwtServiceMock.sign.mockReturnValue(responseToken.accessToken);
       const result = await controller.login(credentials);
 
@@ -51,8 +53,6 @@ describe('Auth Controller', () => {
 
     it('should throw UnauthorizedException receive credentials but not find the user', async () => {
       const credentials = AuthMock.validCredentials();
-
-      userServiceMock.findByUsernameAndPassword.mockReturnValue(null);
 
       let result;
       try {
