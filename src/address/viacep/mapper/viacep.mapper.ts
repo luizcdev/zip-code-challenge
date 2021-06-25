@@ -3,7 +3,7 @@ import { AddressDto } from 'src/address/dto/address.dto';
 import { ViaCepResponseDto } from '../dto/viacep-response.dto';
 
 export function mapByViaCepResponseDto(origin: AxiosResponse): AddressDto {
-  if (origin.data?.erro) return null;
+  if (origin.data.erro) return null;
 
   const response: ViaCepResponseDto = origin.data;
   return <AddressDto>{

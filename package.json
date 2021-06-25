@@ -81,7 +81,17 @@
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
+    "coveragePathIgnorePatterns": [
+      ".schema.ts",
+      ".mock.ts",
+      ".config.ts",
+      ".dto.ts",
+      ".module.ts",
+      "<rootDir>/main.ts",
+      "<rootDir>/health.controller.ts"
+    ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "clearMocks": true
   }
 }

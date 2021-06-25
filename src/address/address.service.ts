@@ -18,12 +18,11 @@ export class AddressService {
 
     const address: AddressDto = await this.getAddress(zipCode);
     if (!address) {
-      const nextZipCode: string = this.getAndValidateNextZipCode(zipCode);
+      const nextZipCode: string = this.getAndValidateNextZipCode(zipCode, key);
       return this.findByZipCode(nextZipCode, key);
     }
 
     this.cacheService.set(this.CACHE_PREFIX, key, address);
-
     return address;
   }
 
@@ -34,12 +33,12 @@ export class AddressService {
     );
   }
 
-  private getAndValidateNextZipCode(zipCode: string): string {
+  private getAndValidateNextZipCode(zipCode: string, key: string): string {
     const ZIPCODE_BREAK = '00000000';
 
     const nextZipCode: string = getNextZipCode(zipCode);
     if (nextZipCode == ZIPCODE_BREAK)
-      throw new NotFoundException(`zipCode ${zipCode} not found`);
+      throw new NotFoundException(`zipCode ${key} not found`);
 
     return nextZipCode;
   }
