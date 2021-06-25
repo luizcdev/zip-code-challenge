@@ -17,6 +17,10 @@ export class UserService {
     return this.userModel.findOne({ username, password }).exec();
   }
 
+  async findByUsername(username: string): Promise<User> {
+    return this.userModel.findOne({ username }).exec();
+  }
+
   async create(userRequest: UserRequestDto): Promise<User> {
     const user: User = await this.userModel
       .findOne({ username: userRequest.username })

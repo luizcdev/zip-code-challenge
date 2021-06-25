@@ -7,6 +7,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DataBaseModule } from './core/database/database.module';
 import { UserModule } from './user/user.module';
 import { TerminusModule } from '@nestjs/terminus';
+import { SeederModule } from './seeder/seeder.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { TerminusModule } from '@nestjs/terminus';
     UserModule,
     AddressModule,
     DataBaseModule,
+    SeederModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TerminusModule,
   ],
