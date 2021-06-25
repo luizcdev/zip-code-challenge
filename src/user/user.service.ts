@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schema/user.schema';
-import { UserDto } from './dto/user.dto';
+import { UserRequestDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -17,7 +17,7 @@ export class UserService {
     return this.userModel.findOne({ username, password }).exec();
   }
 
-  async create(user: UserDto): Promise<User> {
+  async create(user: UserRequestDto): Promise<User> {
     let userDocument: User = await this.userModel
       .findOne({ username: user.username })
       .exec();

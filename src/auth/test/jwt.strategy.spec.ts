@@ -6,7 +6,7 @@ import { AuthMock } from './auth.mock';
 describe('Auth Controller', () => {
   let strategy: JwtStrategy;
 
-  beforeAll(async (done) => {
+  beforeAll(async () => {
     const app: TestingModule = await Test.createTestingModule({
       imports: [],
       providers: [JwtStrategy, ConfigService],
@@ -18,7 +18,6 @@ describe('Auth Controller', () => {
       .compile();
 
     strategy = app.get<JwtStrategy>(JwtStrategy);
-    done();
   });
 
   describe('login', () => {

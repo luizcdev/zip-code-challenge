@@ -46,7 +46,7 @@ describe('Auth Controller', () => {
       jwtServiceMock.sign.mockReturnValue(responseToken.accessToken);
       const result = await controller.login(credentials);
 
-      expect(result.accessToken).toEqual(responseToken.accessToken);
+      expect(result).toEqual(responseToken);
     });
 
     it('should throw UnauthorizedException receive credentials but not find the user', async () => {

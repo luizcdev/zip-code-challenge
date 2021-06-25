@@ -7,7 +7,6 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 import { ViaCepMock } from './viacep.mock';
-import { ViaCepResponseDto } from '../dto/viacep-response.dto';
 import { of, throwError } from 'rxjs';
 import { mapByViaCepResponseDto } from '../mapper/viacep.mapper';
 
