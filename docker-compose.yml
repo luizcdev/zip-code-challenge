@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT}
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+
+  api:
+    build: .
+    ports:
+      - ${API_PORT}:${API_PORT}
+    depends_on:
+      - redis
+      - mongo
