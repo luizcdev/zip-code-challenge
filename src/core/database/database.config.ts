@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
   MongooseOptionsFactory,
   MongooseModuleOptions,
@@ -6,9 +7,10 @@ import {
 
 @Injectable()
 export class DatabaseConfig implements MongooseOptionsFactory {
+  constructor(private readonly configService: ConfigService) {}
   createMongooseOptions(): MongooseModuleOptions {
     return {
-      uri: process.env.MONGODB_URI,
+      uri: this.configService.get<string>('MONGODB_URI'),
       dbName: 'zipcode',
       useCreateIndex: true,
     };

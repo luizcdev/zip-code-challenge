@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from './schema/user.schema';
 import { UserRequestDto } from './dto/user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -28,9 +29,10 @@ export class UserService {
 
     if (user) throw new BadRequestException('Username already exists');
 
+    const hash = await bcrypt.hash(userRequest.password, 10);
     return this.userModel.create(<User>{
       username: userRequest.username,
-      password: userRequest.password,
+      password: hash,
     });
   }
 }
