@@ -16,21 +16,25 @@ export class AddressService {
   async findByZipCode(zipCode: string, key?: string): Promise<AddressDto> {
     if (!key) key = zipCode;
 
-    const address: AddressDto = await this.getAddress(zipCode);
+    const address: AddressDto =
+      (await this.cacheService.get(this.CACHE_PREFIX, zipCode)) ||
+      (await this.requestAddressToClient(zipCode, key));
+
     if (!address) {
       const nextZipCode: string = this.getAndValidateNextZipCode(zipCode, key);
       return this.findByZipCode(nextZipCode, key);
     }
 
-    this.cacheService.set(this.CACHE_PREFIX, key, address);
     return address;
   }
 
-  private async getAddress(zipCode: string): Promise<AddressDto> {
-    return (
-      (await this.cacheService.get(this.CACHE_PREFIX, zipCode)) ||
-      this.apiService.getByZipCode(zipCode)
-    );
+  private async requestAddressToClient(
+    zipCode: string,
+    key: string,
+  ): Promise<AddressDto> {
+    const address: AddressDto = await this.apiService.getByZipCode(zipCode);
+    if (address) this.cacheService.set(this.CACHE_PREFIX, key, address);
+    return address;
   }
 
   private getAndValidateNextZipCode(zipCode: string, key: string): string {

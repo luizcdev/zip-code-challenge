@@ -3,12 +3,13 @@ import { HealthController } from './health.controller';
 import { AuthModule } from './auth/auth.module';
 import { CacheModule } from './core/cache/cache.module';
 import { AddressModule } from './address/address.module';
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DataBaseModule } from './core/database/database.module';
 import { UserModule } from './user/user.module';
 import { TerminusModule } from '@nestjs/terminus';
 import { SeederModule } from './seeder/seeder.module';
+import { LoggerMiddleware } from './core/middleware/logger.middleware';
 
 @Module({
   imports: [
@@ -25,4 +26,8 @@ import { SeederModule } from './seeder/seeder.module';
   controllers: [HealthController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

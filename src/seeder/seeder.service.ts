@@ -28,7 +28,7 @@ export class SeederService implements OnApplicationBootstrap {
         this.userService.create(<UserRequestDto>{ username, password });
       }
     } catch (e) {
-      this.logger.error('error when execute seeder');
+      this.logger.error('error when execute seeder', e.stack);
     }
   }
 }
