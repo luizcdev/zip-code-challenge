@@ -64,5 +64,21 @@ describe('Auth Controller', () => {
       expect(result).toBeInstanceOf(UnauthorizedException);
       expect(result.message).toEqual('Invalid credentials');
     });
+
+    it('should throw UnauthorizedException receive credentials but not find the user', async () => {
+      const credentials = AuthMock.validCredentials();
+      const user = AuthMock.validUser();
+      userServiceMock.findByUsername.mockReturnValue(user);
+
+      let result;
+      try {
+        await controller.login(credentials);
+      } catch (e) {
+        result = e;
+      }
+
+      expect(result).toBeInstanceOf(UnauthorizedException);
+      expect(result.message).toEqual('Invalid credentials');
+    });
   });
 });
