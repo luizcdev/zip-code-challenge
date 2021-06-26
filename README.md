@@ -42,7 +42,7 @@ O projeto conta com persistência de logs estruturados para todas as requisiçõ
 ### Utilizando o projeto
 - Por padrão o seriço cria um usuário com as credenciais ``{"username": "admin", "password": "admin"}```
 - Para vizualizar os logs no kibana é necessário realizar ao menos uma chamada à api e depois criar o índice do projeto dentro do kibana, por padrão o índice é zipcode.
- 
+
 ### Desenvolvimento do projeto
 Para o projeto foi utilizado typescrypt e nestjs por atenderem os requisitos e para realizar uma experimentação do framework NestJS. 
 Durante o desenvolvimento boas práticas de programação foram adotadas, seguindo os princípios de SOLID e Clean Code, também foram impregados vários conceitos, padrões de projeto e técnicas como Pipes, ExceptionHandlers, Middlewares, Seeders, Injeção de dependência, Testes Unitários, Teste Coverage.
@@ -53,4 +53,5 @@ Durante o desenvolvimento boas práticas de programação foram adotadas, seguin
 - Enriquecer a aplicação com logs principalmente com cálculo de latência do client;
 - Criação automática do índice no kibana;
 
-[Linkedin](https://www.linkedin.com/in/luizclaudiojau/)
+</br></br>
+[Meu Linkedin](https://www.linkedin.com/in/luizclaudiojau/)
