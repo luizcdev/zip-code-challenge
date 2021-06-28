@@ -4,7 +4,7 @@ services:
   redis:
     image: redis
     ports:
-      - ${REDIS_PORT}:${REDIS_PORT}
+      - ${REDIS_PORT}:6379
 
   mongo:
     image: mongo
@@ -12,15 +12,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
     ports:
-      - ${MONGODB_PORT}:${MONGODB_PORT}
-
-  api:
-    build: .
-    ports:
-      - ${API_PORT}:${API_PORT}
-    depends_on:
-      - redis
-      - mongo
+      - ${MONGODB_PORT}:27017
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
@@ -37,3 +29,12 @@ services:
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+
+  api:
+    build: .
+    ports:
+      - ${API_PORT}:${API_PORT}
+    depends_on:
+      - redis
+      - mongo
+      - elasticsearch
